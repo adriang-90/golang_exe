@@ -1,7 +1,5 @@
 package main
 
-import "fmt"
-
 const englishHelloPrefix = "Hello, "
 const spanishHelloPrefix = "Hola, "
 const frenchHelloPrefix = "Bonjur, "
@@ -10,13 +8,7 @@ const polish = "Polish"
 const french = "French"
 const spanish = "Spanish"
 
-func Hello(name string, language string) string {
-	if name == "" {
-		name = "World"
-	}
-
-	prefix := englishHelloPrefix
-
+func greetingPrefix(language string) (prefix string) {
 	switch language {
 	case french:
 		prefix = frenchHelloPrefix
@@ -24,11 +16,16 @@ func Hello(name string, language string) string {
 		prefix = spanishHelloPrefix
 	case polish:
 		prefix = polishHelloPrefix
+	default:
+		prefix = englishHelloPrefix
 	}
-
-	return prefix + name
+	return
 }
 
-func main() {
-	fmt.Println(Hello("", "world"))
+func Hello(name string, language string) string {
+	if name == "" {
+		name = "World"
+	}
+	return greetingPrefix(language) + name
+
 }
